@@ -1,8 +1,8 @@
 const element = {
-    type : "h1",
-    props : {
-        title : "foo",
-        children : "Hello"
+    type: "h1",
+    props: {
+        title: "foo",
+        children: "Hello"
     }
 };
 const container = document.getElementById("root")
@@ -22,3 +22,57 @@ container.appendChild(node);
  * 알면 되게 모두 은닉해서 말이다. 제이쿼리가 SPA 라이브러리 보다 편하다는 사람들은
  * 이것에 대해서 아무런 생각조차 없기에 그런 소리가 나오거나 간단한 코딩만 하기에 그렇겠지. 
  */
+
+class Spact {
+    constructor() {
+        this._node = undefined;
+    }
+
+    createElement(type, ...props) {
+        const _node = this._node = document.createElement(type);
+
+        props.forEach((child) => {
+            if (typeof child === "object" && Object.keys(child).length > 0) {
+                for (let [key, value] of Object.entries(child)) {
+                    if (key === "class") {
+                        key = "className";
+                    }
+                    _node[key] = value;
+                }
+            } else if (typeof child === "string") {
+                const _text = document.createTextNode("");
+                _text.nodeValue = child;
+                _node.appendChild(_text);
+            } else {
+                _node.appendChild(child);
+            }
+        });
+
+        return this._node;
+    }
+    render(entry, components) {
+        const container = document.querySelector(entry);
+
+        container.appendChild(components);
+    }
+}
+
+const View = new Spact();
+
+const HelloSpact = View.createElement(
+    "h2",
+    { "class": "foo" },
+    "Hello2",
+    View.createElement(
+        "p",
+        "재귀구조 순환",
+        View.createElement(
+            "div",
+            {"id" : "foo"},
+            View.createElement("br"),
+            "인라인 속성안의 블록속성"
+        )
+    )
+);
+
+View.render("#root", HelloSpact);
