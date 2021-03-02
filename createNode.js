@@ -70,9 +70,34 @@ const HelloSpact = View.createElement(
             "div",
             {"id" : "foo"},
             View.createElement("br"),
-            "인라인 속성안의 블록속성"
+            "인라인 속성안의 블록속성",
         )
     )
 );
 
 View.render("#root", HelloSpact);
+
+/**
+ * @jsx View.createElement 바벨 트랜스 파일시 지시
+ */
+/*
+const HelloComponents = (
+    <h2 class="foo">
+        Hello2
+        <p>
+            재귀구조 순환
+            <div id="foo">
+                <br />
+                인라인 속성안의 블록속성
+            </div>
+        </p>
+    </h2>
+);
+*/
+
+/**
+ * 아무 생각 없이 만들다 보니 createElement함수가 명명과 다르게 너무 광범위한 역할을 수행한다(DOM 트리 구축)
+ * 트랜스파일러를 통해서 jsx를 처리하는 방법에 대한 궁금증이 조금 생기긴한다.
+ * 클래스 형이나 함수형이나 사실 그닥 차이는 없다고 느낀다. 좀 더 코드 스타일이 달라지긴하는 듯 글고 함수형이
+ * 확실히 좀 더 유연하긴하다.
+ */
