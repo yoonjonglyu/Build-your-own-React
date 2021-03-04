@@ -43,3 +43,37 @@
 /** 
  * 동적 계획법으로 순환하는 구조의 DOM 렌더링이 가능하다.
  */
+
+(() => {
+    const ISA = new Isa();
+    const element2 = {
+        type : "div",
+        props : {
+            id : "main",
+            role : "main",
+            children : [
+                {
+                    type : "p",
+                    props : {
+                        class : "test1",
+                        style : "color : red;",
+                        children : [
+                            "hi test"
+                        ]
+                    },
+                },
+                "test2",
+                {
+                    type : "br",
+                    props : {
+    
+                    }
+                },
+                "test3"
+            ]
+        },
+
+    };
+    const components = ISA.createComponents(element2);
+    ISA.render(document.querySelector("#root2"), components);
+})()
