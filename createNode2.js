@@ -1,3 +1,5 @@
+import Isa from "./lib/isaBasic.js";
+
 (function () {
     const element = {
         type: "div",
@@ -45,6 +47,7 @@
  */
 
 (() => {
+
     const ISA = new Isa();
     const element2 = {
         type : "div",
@@ -76,4 +79,9 @@
     };
     const components = ISA.createComponents(element2);
     ISA.render(document.querySelector("#root2"), components);
-})()
+})();
+
+/**
+ * ES6 모듈의 경우 같은 모듈 type안에서만 export import가능하다.
+ * 그리고 로컬에서는 웹에서 로컬 파일을 참조못하게 하기 위해서 보안 설정 되어서 서버에 올려서 돌려야 정상적으로 확인가능하다.
+ */
