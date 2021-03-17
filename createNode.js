@@ -101,3 +101,21 @@ const HelloComponents = (
  * 클래스 형이나 함수형이나 사실 그닥 차이는 없다고 느낀다. 좀 더 코드 스타일이 달라지긴하는 듯 글고 함수형이
  * 확실히 좀 더 유연하긴하다.
  */
+
+let nextUnitOfWork = null;
+
+function workLoop(deadline) {
+    let shouldYield = false;
+    while (nextUnitOfWork && !shouldYield) {
+        nextUnitOfWork = performanceUnitOfWork(nextUnitOfWork);
+        shouldYield = deadline.timeRemaning() < 1;
+    }
+    requestAnimationFrame(workLoop);
+}
+
+function performanceUnitOfWork(nextUnitOfWork) {
+    
+}
+
+requestAnimationFrame(workLoop);
+
