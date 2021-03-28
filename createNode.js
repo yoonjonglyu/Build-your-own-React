@@ -108,14 +108,13 @@ function workLoop(deadline) {
     let shouldYield = false;
     while (nextUnitOfWork && !shouldYield) {
         nextUnitOfWork = performanceUnitOfWork(nextUnitOfWork);
-        shouldYield = deadline.timeRemaning() < 1;
+        shouldYield = deadline.timeRemaing() < 1;
     }
-    requestAnimationFrame(workLoop);
+    requestIdleCallback(workLoop);
 }
 
 function performanceUnitOfWork(nextUnitOfWork) {
     
 }
 
-requestAnimationFrame(workLoop);
-
+requestIdleCallback(workLoop);
