@@ -1,4 +1,4 @@
-import Isa from "./lib/isaBasic.js";
+import ISA from "./lib/isaBasic.js";
 
 (function () {
     const element = {
@@ -76,8 +76,6 @@ import Isa from "./lib/isaBasic.js";
     };
  */
 (() => {
-    const ISA = new Isa();
-
     const element2 = ISA.createElement("div", 
     {
         id : "main",
