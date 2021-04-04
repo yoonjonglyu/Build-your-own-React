@@ -46,10 +46,8 @@ import Isa from "./lib/isaBasic.js";
  * 동적 계획법으로 순환하는 구조의 DOM 렌더링이 가능하다.
  */
 
-(() => {
-
-    const ISA = new Isa();
-    const element2 = {
+/**
+ *     const element2 = {
         type : "div",
         props : {
             id : "main",
@@ -75,8 +73,29 @@ import Isa from "./lib/isaBasic.js";
                 "test3"
             ]
         },
-
     };
+ */
+(() => {
+    const ISA = new Isa();
+
+    const element2 = ISA.createElement("div", 
+    {
+        id : "main",
+        role : "main",
+    },
+    [
+        ISA.createElement("p",{
+            class : "test1",
+            style : "color : red;",
+        },
+        [
+            "hi test"
+        ]),
+        "test2",
+        ISA.createElement("br"),
+        "test3"
+    ]
+    )
     const components = ISA.createComponents(element2);
     ISA.render(document.querySelector("#root2"), components);
 })();
